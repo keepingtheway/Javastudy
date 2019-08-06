@@ -1,0 +1,152 @@
+数据库的CRUD
+一、数据库的概念
+1.什么是数据库
+存储数据的仓库。
+2.五个基本概念
+数据库服务器：安装了数据库包的电脑  包含多个数据库
+数据库	      ：存储数据的仓库
+数据表	      ：每个数据库中都包含多张表
+数据字段        ：每个表中都包含多个字段
+数据	行	      ：表中存储的数据
+二、数据库的安装 
+MySQL 5.5融合了MySQL数据库和InnoDB存储引擎的优点，能够提供高性能的数据管理解决方
+案，包括：InnoDB作为默认的数据库存储引擎。改善性能和可扩展性，全面利用各平台现
+代、多核构架的计算能力。
+提高实用性。
+提高易管理性和效率。
+提高可用性。
+三、SQL分类
+1.DDL（数据定义语句）
+用于定义不同的数据对象、数据库、表、列、索引等，常用的有create drop alter等
+2.DML（数据操作语句）
+数据库操作语句，用于添加、删除、更新和查询数据库记录，并检查数据的完整性
+常用的语句关键词有 insert、delete、update以及select等
+3.DCL（数据控制语句）
+用于控制不同数据段直接的许可个访问级别的语句，这些语句定义了数据库、表、
+字段、用户的访问权限和安全级别。关键词 grant、revoke等。
+4、数据库的操作
+数据定义语句：
+数据库的操作
+新建数据库：create database  (数据库名)  Superuser
+
+
+查询数据库表   先要use （数据库名）userdb  再去show  tables;
+
+
+
+数据表操作
+在数据库中新建一张表 create table (表名) t_test (id int primary key 
+auto_increment,name varchar(20),age int (3));
+
+
+
+删除表 drop table （表名）course
+
+
+
+修改表名  alter table t_test rename t_number
+
+
+
+数据库字段的操作：
+显示表中数据的信息  desc (表名) t_number
+
+
+
+修改字段类型 alter table t_number modify name varchar(50);
+
+
+
+修改字段名 alter table t_number change age salary double(8,3);
+
+
+
+增加字段  alter table t_number add colunm age int(2);
+
+
+删除字段 alter table （表名） drop column age;
+
+数据操作语句
+插入数据：
+1、insert into 表名（数据字段1，数据字段2，...） values（数据1，数据 2，...）
+
+2、insert into 表名 values（数据1，数据2，数据3）：每一个数据字段都要给值
+两种语法的区别：
+基本语法2的插入语句，表中有多少个字段就必须要插入多少个值。一个不能多，一个
+也不能少。若有默认值，不想传，可以写上null。基本语法1中，除非有必填字段必须要
+写入值外。如果有默认值的不想写可以忽略不写。mysql会自动补主默认值
+
+查询语句语法：
+select * from 表;
+select 字段 from 表;
+select distinct 字段 from 表;
+select 字段 from 表 where where条件;
+select 字段 from 表 order by 字段 排序关键词
+asc 升序排列，从小到大（默认）
+desc 降序排列，从大到小
+查询name 以及唯一的salary
+
+按照顺序 从小到大和从大到小的排序
+
+
+
+结果集的限制
+语法  select 字段 from 表 limit 数量； 取前几条数据
+
+取该表中 按照salary 排序的最大的 前两项
+语句： select salary from t_number order by salary desc limit 2;
+
+统计函数使用 （复合函数）
+函数 说明
+sum 求和
+count 统计总数
+max 最大值
+min 最小值
+avg 平均值
+
+
+
+count 不会统计null值
+
+
+分组过滤
+
+
+
+多表连接查询 
+内连接
+当需要查询多个表中的字段时，就可以使用表连接来实现。表联接分为内连接和外连接。
+内联结：将两个表中存在联结关系的字段符合联结关系的那些记录形成记录集的联结。
+外连接：会选出其他不匹配的记录，分为外左联结和外右联结。
+内连接
+select 表1.字段 ,表n.字段 from 表1 [别名],表n where 条件;
+select 表1.字段 [as 别名],表n.字段 from 表1 INNER JOIN 表n on 条件;
+
+外连接
+select 表1.字段 [as 别名],表n.字段 from 表1 LEFT JOIN 表n on 条件;
+左连接：包含所有的左边表中的记录甚至是右边表中没有和它匹配的记录
+右连接：包含所有的右边表中的记录甚至是左边表中没有和它匹配的记录
+
+DCl
+    数据库权限控制
+
+数据库的备份和恢复
+备份：
+mysqldump -u root -p lhp>d:\lhp.sql
+密码过后输入
+mysqldump -u root -proot  lhp>d:\lhp.sql
+ 
+恢复：
+前提：必须先创建数据库
+需先登录mySQL,进入指定数据库后执行SQL
+Source d:\\lhp.sql
+
+
+
+
+删除某个表
+
+数据库的恢复
+
+
+
